@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/css/bootstrap.min.js"/>
-    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-    <title>Esempio login social</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="webjars/bootstrap/css/bootstrap.min.js" />
+  <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+  <title>Esempio login social</title>
 </head>
+
 <body>
-    <div class="container unauthenticated">
-        Collegati con github : <a href="/oauth2/authorization/github">clicca qui</a>
-    </div>
+  <div class="container unauthenticated">
+    Collegati con github : <a href="/oauth2/authorization/github">clicca qui</a>
+  </div>
 
-    <div class="container authenticated">
-        Collegato come: <span id="user"></span>
-    </div>
-
+  <div class="container authenticated">
+    Collegato come: <span id="user"> </span>
+  </div>
+  <script type="text/javascript">
+    $.get("/social/user", function (data) {
+      $("#user").html(data);
+    })
+  </script>
 </body>
+
 </html>
