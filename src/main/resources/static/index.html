@@ -19,13 +19,20 @@
 
   <div class="container authenticated" style="display:none">
     Collegato come: <span id="user"> </span>
+    <button onClick="logout()">Logout</button>
   </div>
 
   <script type="text/javascript">
     $.get("/social/user", function (data) {
       $("#user").html(data);
       $(".authenticated").show();
-    })
+    });
+    var logout = function() {
+      $.post("/logout", function() {
+        $("#user").html("");
+        $(".authenticated").hide();
+      })
+    }
   </script>
 </body>
 
