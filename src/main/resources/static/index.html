@@ -13,13 +13,18 @@
   <div class="container unauthenticated">
     Collegati con github : <a href="/oauth2/authorization/github">clicca qui</a>
   </div>
+  <div class="container unauthenticated">
+    Collegati con google : <a href="/oauth2/authorization/google">clicca qui</a>
+  </div>
 
-  <div class="container authenticated">
+  <div class="container authenticated" style="display:none">
     Collegato come: <span id="user"> </span>
   </div>
+
   <script type="text/javascript">
     $.get("/social/user", function (data) {
       $("#user").html(data);
+      $(".authenticated").show();
     })
   </script>
 </body>

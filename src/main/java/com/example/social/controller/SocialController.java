@@ -11,7 +11,11 @@ public class SocialController {
 
   @GetMapping("/social/user")
   public String getUser(@AuthenticationPrincipal OAuth2User principal) {
-    return principal.getAttribute("url").toString();
+    String returnValue = "none";
+    if (principal != null) {
+      returnValue = principal.getAttribute("name");
+    }
 
+    return returnValue;
   }
 }
