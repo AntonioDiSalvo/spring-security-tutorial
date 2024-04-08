@@ -1,10 +1,9 @@
 # metadati
 name: CI/CD per progetto esemplificativo spring security
 on:
-  workflow_dispatch:
-    push:
-      branches:
-        - main
+  push:
+    branches:
+      - main
 jobs:
   run-test:
     name: Esecuzione Test
