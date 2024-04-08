@@ -21,7 +21,7 @@ jobs:
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashfiles('**/pom.xml') }}
-          restore-key: ${{ runner.os }}-m2
+          restore-keys: ${{ runner.os }}-m2
       - name: esegui test
         run: mvn -B test
   quality-check:
@@ -46,7 +46,7 @@ jobs:
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashfiles('**/pom.xml') }}
-          restore-key: ${{ runner.os }}-m2
+          restore-keys: ${{ runner.os }}-m2
       - name: analisi sonarcloud
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
         env:
@@ -68,7 +68,7 @@ jobs:
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashfiles('**/pom.xml') }}
-          restore-key: ${{ runner.os }}-m2
+          restore-keys: ${{ runner.os }}-m2
       - name: esegui build
         run: mvn -B package -DskipTests --file pom.xml
       - name: upload JAR
@@ -104,7 +104,7 @@ jobs:
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashfiles('**/pom.xml') }}
-          restore-key: ${{ runner.os }}-m2
+          restore-keys: ${{ runner.os }}-m2
       - name: esegui build
         run: mvn -B package -DskipTests --file pom.xml
       #docker build and push
@@ -115,5 +115,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ steps.meta.output.tags }}
+          tags: testing #${{ steps.meta.output.tags }}
           labels: ${{ steps.meta.outputs.labels }}
