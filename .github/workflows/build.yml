@@ -1,0 +1,26 @@
+# metadati
+name: CI/CD per progetto esemplificativo spring security
+on:
+  workflow_dispatch:
+    push:
+      branches:
+        - main
+jobs:
+  run-test:
+    name: Esecuzione Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout del codice
+        uses: actions/checkout@v4
+      - name: setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: '21'
+      - name: maven cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashfiles('**/pom.xml') }}
+          restore-key: ${{ runner.os }}-m2
+      - name: esegui test
+        run: mvn -B test
