@@ -116,3 +116,27 @@ jobs:
           push: true
           tags: disalvoantonio/social:testing #${{ steps.meta.output.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+  push_tag_to_manifest:
+    name: modifica il tag sul manifest del repository di infrastruttura
+    needs: push_image_to_registry
+    runs-on: ubuntu-latest
+    steps:
+      - name: installazione tooling
+        run: |
+          sudo curl -L https://github.com/mikefarah/yq/releases/download/v4.35.2/yq_linux_amd64 -o /usr/local/bin/yq
+          sudo chmod +x /usr/local/bin/yq
+      - uses: actions/checkout@v4
+        with:
+          repository:
+          ref: 'main'
+          token: ${{ secrets.ACTION_GH_TOKEN }}
+      - name: aggiorna tag immagine
+        run: | 
+          yq -i e '.spec.template.spec.containers.[0].image = "disalvoantonio/social:testing"' k8s/spring-security.yaml
+      - name: commit/push
+        run: |
+          git config user.name "Bot Aggiornamento"
+          git config user.email "test@example.org"
+          git add k8s/spring-security.yaml
+          git commit -m "aggiorno tag immagine"
+          git push origin HEAD:main
