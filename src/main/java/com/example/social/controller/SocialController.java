@@ -17,6 +17,7 @@ public class SocialController {
   @GetMapping("/social/user")
   public ResponseEntity<String> getUser(@AuthenticationPrincipal OAuth2User principal) {
     String returnValue = "none";
+    System.out.println("/social/user has been called");
     if (principal != null) {
       returnValue = principal.getAttribute("name");
     } else {
