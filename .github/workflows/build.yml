@@ -127,7 +127,7 @@ jobs:
           sudo chmod +x /usr/local/bin/yq
       - uses: actions/checkout@v4
         with:
-          repository:
+          repository: 'AntonioDiSalvo/spring-security-tutorial-infra'
           ref: 'main'
           token: ${{ secrets.ACTION_GH_TOKEN }}
       - name: aggiorna tag immagine
